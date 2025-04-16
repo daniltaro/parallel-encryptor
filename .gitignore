@@ -24,11 +24,8 @@ Makefile
 # OpenSSL temporary files
 *.log
 
-# Test files (if you don't want to commit them)
+# Test files 
 TESTS/*
 
 # External libraries (if you have any external folders like dependencies)
 External/
-
-# Python files (if applicable)
-script.py
