@@ -3,10 +3,10 @@
 #include <string>
 #include <list>
 #include <thread>
-#include "app/FileScanner/FileScanner.hpp"
-#include "app/Tasks/Task.hpp"
-#include "app/Tasks/TaskQueue.hpp"
-#include "app/Crypter/Crypter.hpp"
+#include "FileScanner/FileScanner.hpp"
+#include "Tasks/Task.hpp"
+#include "Tasks/TaskQueue.hpp"
+#include "Crypter/Crypter.hpp"
 
 void worker(TaskQueue &queue, const std::string &key) {
     Crypter crypter(key);
