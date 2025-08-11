@@ -11,8 +11,7 @@
 void worker(TaskQueue &queue, const std::string &key) {
     Crypter crypter(key);
     while (!queue.empty()) {
-        Task task = queue.pop();
-        if (task.getStatus() == ENCRYPT)
+        if (Task task = queue.pop(); task.getStatus() == ENCRYPT)
             crypter.encrypt(task.getPath());
         else
             crypter.decrypt(task.getPath());
@@ -31,14 +30,14 @@ int main() {
     std::cout << "Enter the status: ";
     std::getline(std::cin, stat);
 
-    std::cout << "Enter the key: ";
+    std::cout << "Enter the key (32 characters): ";
     std::getline(std::cin, key);
     if (key.size() != 32) {
         throw std::runtime_error("Invalid key size");
     }
-    if (stat == "encrypt") {
+    if (stat == "encrypt" || stat == "Encrypt") {
         status = ENCRYPT;
-    } else if (stat == "decrypt") {
+    } else if (stat == "decrypt" || stat == "Decrypt") {
         status = DECRYPT;
     } else {
         throw std::invalid_argument("Invalid status");
@@ -50,7 +49,7 @@ int main() {
             FileScanner fileScanner(path);
             std::list<std::string> list_of_files = fileScanner.GetFileList();
             std::cout << "List of files: " << '\n';
-            for (auto &file: list_of_files) {
+            for (const auto &file: list_of_files) {
                 std::cout << file << '\n';
                 Task task(file, status);
                 tasks.push(task);

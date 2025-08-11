@@ -6,7 +6,7 @@
 
 class FileScanner {
 public:
-    FileScanner(const std::string &path_);
+    explicit FileScanner(const std::string &path_);
 
     std::list<std::string> GetFileList() const;
 

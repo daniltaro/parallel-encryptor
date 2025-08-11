@@ -6,8 +6,14 @@
 #include <openssl/evp.h>
 #include <openssl/rand.h>
 
+std::mutex m;
+
 void Crypter::encrypt(const std::string &path) {
-    std::cout << "[Thread " << std::this_thread::get_id() << "] Encrypting file: " << path << '\n';
+    {
+        std::lock_guard<std::mutex> lock(m);
+        std::cout << "[Thread " << std::this_thread::get_id() << "] Encrypting file: " << path << '\n';
+    }
+
     std::ifstream infile(path, std::ios::binary);
     if (!infile.is_open()) {
         throw std::runtime_error("Could not open file " + path + " for reading");
@@ -39,7 +45,8 @@ void Crypter::encrypt(const std::string &path) {
 
     std::vector<unsigned char> encrypted(input.size() + AES_BLOCK_SIZE);
     int out_len1 = 0;
-    if (EVP_EncryptUpdate(ctx, encrypted.data(), &out_len1, input.data(), static_cast<int>(input.size())) != 1) {
+    if (EVP_EncryptUpdate(ctx, encrypted.data(), &out_len1, input.data(),
+                                        static_cast<int>(input.size())) != 1) {
         EVP_CIPHER_CTX_free(ctx);
         throw std::runtime_error("EVP_EncryptUpdate failed");
     }
@@ -61,7 +68,11 @@ void Crypter::encrypt(const std::string &path) {
 }
 
 void Crypter::decrypt(const std::string &path) {
-    std::cout << "[Thread " << std::this_thread::get_id() << "] Decrypting file: " << path << '\n';
+    {
+        std::lock_guard<std::mutex> lock(m);
+        std::cout << "[Thread " << std::this_thread::get_id() << "] Decrypting file: " << path << '\n';
+    }
+
     std::ifstream infile(path, std::ios::binary);
     if (!infile.is_open()) {
         throw std::runtime_error("Could not open file " + path + " for reading");

@@ -2,13 +2,14 @@
 #define CRYPTER_HPP
 
 #include <string>
+#include <mutex>
 
 class Crypter {
 private:
     std::string key;
 
 public:
-    Crypter(const std::string &key_);
+    explicit Crypter(const std::string& key_);
 
     void encrypt(const std::string &path);
 

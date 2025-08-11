@@ -15,7 +15,7 @@ private:
     Status status;
 
 public:
-    Task(const std::string &_path, Status _status);
+    Task(const std::string &_path, const Status& _status);
 
     const std::string &getPath() const;
 
