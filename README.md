@@ -15,7 +15,8 @@ A multithreaded AES-256-CBC file encryptor and decryptor written in C++ using Op
 
 ```bash
 mkdir build && cd build
-cmake ...
+cmake ..
+make
 ```
 
 2.	Run the program:
