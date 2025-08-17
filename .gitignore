@@ -1,31 +1,15 @@
-# macOS system files
 .DS_Store
-
-# Virtual Environment
 .venv/
-
-# C++ build files
 /cmake-build-debug/
+/build/
 *.o
 *.a
 *.so
 *.out
 *.exe
-
-# CMake files
 CMakeCache.txt
 CMakeFiles/
 CMakeOutput.log
 Makefile
-
-# CLion files (IDE-specific)
 .idea/
-
-# OpenSSL temporary files
 *.log
-
-# Test files 
-TESTS/*
-
-# External libraries (if you have any external folders like dependencies)
-External/
