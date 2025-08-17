@@ -13,3 +13,4 @@ CMakeOutput.log
 Makefile
 .idea/
 *.log
+.vscode/

@@ -14,6 +14,7 @@ A multithreaded AES-256-CBC file encryptor and decryptor written in C++ using Op
 1. Clone the repo and build using CMake:
 
 ```bash
+git clone git clone --recursive <repo>
 mkdir build && cd build
 cmake ..
 make
