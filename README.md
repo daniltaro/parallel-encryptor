@@ -1,6 +1,6 @@
 # Parallel Encryptor
 
-A multithreaded AES-256-CBC file encryptor and decryptor written in C++ using OpenSSL.
+A multithreaded AES-256-CBC file encryptor and decryptor written in C++ using OpenSSL
 
 ## Features
 
@@ -24,7 +24,7 @@ make
 ./Parallel_Encryptor
 ```
 
-3.	Input path, mode (encrypt or decrypt), and a 32-character key.
+3.	Input path, mode (encrypt or decrypt), and a 32-character key
 
 Example
 ```bash
@@ -33,6 +33,7 @@ Enter the status: encrypt
 Enter the key: 12345678901234567890123456789012
 ```
 ## Notes
-- Make sure OpenSSL is installed.
-- Your key must be 32 characters long for AES-256.
-- Encrypted files store the IV at the beginning.
+- Make sure OpenSSL is installed
+- Your key must be 32 characters long for AES-256
+- Encrypted files store the IV at the beginning
+- Make sure Gtest is installed for tests
