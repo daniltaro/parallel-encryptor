@@ -2,7 +2,7 @@
 #include <filesystem>
 #include <iostream>
 #include <fstream>
-#include <../../app/FileScanner/FileScanner.hpp>
+#include <../app/FileScanner/FileScanner.hpp>
 
 namespace fs = std::filesystem;
 

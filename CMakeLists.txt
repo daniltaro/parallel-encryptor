@@ -1,36 +1,34 @@
 cmake_minimum_required(VERSION 3.30)
-project(Parallel_Encryptor)
-
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+project(Parallel_Encryptor)
 
+#   PROJECT
 find_package(OpenSSL REQUIRED)
 
-add_subdirectory(
-    "${CMAKE_CURRENT_SOURCE_DIR}/googletest"
+add_library(core_lib STATIC
+    app/FileScanner/FileScanner.cpp
+    app/Tasks/Task.cpp
+    app/Tasks/TaskQueue.cpp
+    app/Crypter/Crypter.cpp
 )
 
-add_executable(Parallel_Encryptor app/main.cpp
-        app/FileScanner/FileScanner.cpp
-        app/FileScanner/FileScanner.hpp
-        app/Tasks/Task.cpp
-        app/Tasks/Task.hpp
-        app/Tasks/TaskQueue.cpp
-        app/Tasks/TaskQueue.hpp
-        app/Crypter/Crypter.cpp
-        app/Crypter/Crypter.hpp
-)
+target_include_directories(core_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/app)
+target_link_libraries(core_lib PUBLIC OpenSSL::Crypto)
 
-add_executable(tests 
+add_executable(Parallel_Encryptor app/main.cpp)
+target_link_libraries(Parallel_Encryptor PRIVATE core_lib)
+
+#   TESTS
+find_package(GTest)
+if(GTest_FOUND)
+    add_executable(
+        tests
         test/test_filescanner.cpp
-        app/FileScanner/FileScanner.cpp
-        app/FileScanner/FileScanner.hpp
-)
+        test/test_crypter.cpp
+    )
 
-target_link_libraries(Parallel_Encryptor OpenSSL::Crypto)
-
-target_link_libraries(
-    tests PRIVATE
-    gtest gtest_main
-)
+    target_include_directories(tests PRIVATE ${GTEST_INCLUDE_DIRS})
+    target_link_libraries(tests PRIVATE core_lib GTest::gtest_main GTest::gtest)
+endif()

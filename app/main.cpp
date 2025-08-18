@@ -48,7 +48,7 @@ int main() {
             TaskQueue tasks;
             FileScanner fileScanner(path);
             std::list<std::string> list_of_files = fileScanner.GetFileList();
-            std::cout << "List of files: " << '\n';
+            std::cout << "\nList of files: " << '\n';
             for (const auto &file: list_of_files) {
                 std::cout << file << '\n';
                 Task task(file, status);
