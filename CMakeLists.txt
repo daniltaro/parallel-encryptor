@@ -27,6 +27,7 @@ if(GTest_FOUND)
         tests
         test/test_filescanner.cpp
         test/test_crypter.cpp
+        test/test_tasks.cpp
     )
 
     target_include_directories(tests PRIVATE ${GTEST_INCLUDE_DIRS})
